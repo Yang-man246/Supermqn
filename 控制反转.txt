@@ -1,0 +1,26 @@
+6.IOC（Inversion Of Control）：控制反转,把创建的对象和对象之间的维护的权限转交给spring。
+	//输出学生信息
+	public void studentInfo() {
+		System.out.println("学号："+stuNo+"姓名"+stuName+"性别："+sex);
+		phone.phoneInfo();
+	}
+	
+	//输出手机信息
+	public void phoneInfo() {
+		System.out.println("手机信息："+phoneName+"价格："+phonePrice);
+	}
+	
+	ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+	Student stu = (Student) ac.getBean("student");
+	stu.studentInfo();
+	
+	<bean class="com.aaa.ioc.Phone" id="phone">
+		<property name="phoneName" value="OPPO"></property>
+		<property name="phonePrice" value="5110"></property>
+	</bean>
+	<bean class="com.aaa.ioc.Student" id="student">
+		<property name="stuNo" value="234"></property>
+		<property name="stuName" value="李四"></property>
+		<property name="sex" value="女"></property>
+		<property name="phone" ref="phone"></property>
+	</bean>
